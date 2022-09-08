@@ -1,0 +1,50 @@
+org: neel001
+app: aws-node
+service: aws-node
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+ 
+  CreateUser:
+    handler: handler.CreateUser # path will be domain.name.com/dev/notes
+    events:
+      - http:
+          path: createuser
+          method: post
+          cors: true
+    
+  getOne:
+    handler: handler.getOne
+    events:
+      - http:
+          path: getone/{id} # path will be domain.name.com/dev/notes/1
+          method: get
+          cors: true
+
+  getAll:
+    handler: handler.getAll # path will be domain.name.com/dev/notes
+    events:
+      - http:
+          path: notes
+          method: get
+          cors: true    
+
+  update:
+    handler: handler.update # path will be domain.name.com/dev/notes/1
+    events:
+      - http:
+          path: update/{id}
+          method: put
+          cors: true
+  delete:
+    handler: handler.delete
+    events:
+      - http:
+          path: delete/{id} # path will be domain.name.com/dev/notes/1
+          method: delete
+          cors: true
